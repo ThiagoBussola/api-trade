@@ -6,7 +6,7 @@ import { compareSync } from 'bcrypt';
 export class AuthService {
   constructor(private userService: UserService) {}
 
-  async validateUser(userEmail: string, userPassword: string) {
+  async validateUser(userEmail: string, userPassword: string): Promise<any> {
     const user = await this.userService.getByEmail(userEmail);
 
     const decryptPassword = compareSync(userPassword, user.password);
