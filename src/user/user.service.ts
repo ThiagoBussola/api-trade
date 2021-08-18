@@ -26,17 +26,21 @@ export class UserService {
     const createUser = await this.userModel.create({
       name,
       email,
-      hash,
+      password: hash,
     });
 
-    return createUser;
+    const newUser = await this.userModel
+      .findOne({ email: email })
+      .select('-password');
+
+    return newUser;
   }
 
   async findAll(): Promise<Array<User>> {
     return await this.userModel.find().select('-password');
   }
 
-  async getByEmail(email: string) {
+  async getByEmail(email: string): Promise<User> {
     return await this.userModel.findOne({ email: email });
   }
 }
