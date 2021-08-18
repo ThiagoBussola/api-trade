@@ -1,4 +1,4 @@
-const validationCep = (cep) => {
+const validationCep = (cep: any): any => {
   cep = cep.replace(/\D+/g, '');
 
   const isValid = [];
@@ -20,20 +20,24 @@ const validationCep = (cep) => {
       }
     }
   } else {
-    console.log('cep invalido', cep);
-    return false;
+    throw new Error(`Esse CEP está inválido: ${cep}`);
   }
 
   // todos os itens do array devem ser verdadeiros, caso contrario existem repetições indesejaveis
   const finalValidation = isValid.every((valid) => valid === true);
 
-  return finalValidation;
+  return {
+    finalValidation,
+    cep,
+  };
 };
 
-console.log(validationCep('123456'));
-console.log(validationCep('135796'));
+export { validationCep };
 
-console.log(validationCep('012345'), 'esse');
-console.log(validationCep('9999999'), 'esse');
-console.log(validationCep('352523'));
-console.log(validationCep('121426'));
+// console.log(validationCep('123456'));
+// console.log(validationCep('135796'));
+
+// console.log(validationCep('012345'), 'esse');
+// console.log(validationCep('9999999'), 'esse');
+// console.log(validationCep('352523'));
+// console.log(validationCep('121426'));

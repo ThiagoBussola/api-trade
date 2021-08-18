@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { CepService } from './cep.service';
 import { CreateCepDto } from './dtos/create-cep.dto';
 import { Cep } from './interfaces/cep.interface';
@@ -8,6 +15,7 @@ export class CepController {
   constructor(private readonly cepService: CepService) {}
 
   @Post()
+  @UsePipes(ValidationPipe)
   async createCep(@Body() createCepDto: CreateCepDto): Promise<Cep> {
     return await this.cepService.createCep(createCepDto);
   }
