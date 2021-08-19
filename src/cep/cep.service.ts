@@ -10,21 +10,21 @@ export class CepService {
   constructor(@InjectModel('Cep') private readonly cepModel: Model<Cep>) {}
 
   async createCep(createCepDto: CreateCepDto): Promise<Cep> {
-      const { cep } = createCepDto;
+    const { cep } = createCepDto;
 
-      const validCep = validationCep(cep);
+    const validCep = validationCep(cep);
 
+    const findCep = await this.cepModel.findOne({ cep: validCep.cep });
 
-      const findCep = await this.cepModel.findOne({ cep: validCep.cep });
+    if (findCep) {
+      throw new BadRequestException(
+        `Cep: ${validCep} já cadastrado no sistema`,
+      );
+    }
 
-      if (findCep) {
-        throw new BadRequestException(`Cep: ${validCep} já cadastrado no sistema`);
-      }
+    const createdCep = new this.cepModel(createCepDto);
 
-      const createdCep = new this.cepModel(createCepDto);
-
-      return await createdCep.save();
-
+    return await createdCep.save();
   }
 
   async findAll(): Promise<Array<Cep>> {
