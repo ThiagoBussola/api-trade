@@ -6,7 +6,7 @@ export const CepSchema = new mongoose.Schema(
       type: String,
       unique: true,
     },
-    cidade: {
+    city: {
       type: String,
     },
   },

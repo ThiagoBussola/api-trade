@@ -13,8 +13,8 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { User } from './interfaces/user.interface';
-import { ParameterValidationPipe } from 'src/common/pipes/parameters-validation.pipe';
-import { JwtAuthGuard } from 'src/auth/jwt-guard.guard';
+import { ParameterValidationPipe } from '../common/pipes/parameters-validation.pipe';
+import { JwtAuthGuard } from '../auth/jwt-guard.guard';
 
 @Controller('users')
 export class UserController {

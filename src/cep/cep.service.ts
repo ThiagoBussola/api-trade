@@ -52,6 +52,10 @@ export class CepService {
     return await this.cepExists(cepId);
   }
 
+  async findByCep(cep: string): Promise<Cep> {
+    return await this.cepModel.findOne({ cep });
+  }
+
   async remove(cepId: string): Promise<any> {
     await this.cepExists(cepId);
 

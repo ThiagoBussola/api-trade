@@ -10,8 +10,8 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/auth/jwt-guard.guard';
-import { ParameterValidationPipe } from 'src/common/pipes/parameters-validation.pipe';
+import { JwtAuthGuard } from '../auth/jwt-guard.guard';
+import { ParameterValidationPipe } from '../common/pipes/parameters-validation.pipe';
 import { CepService } from './cep.service';
 import { CreateCepDto } from './dtos/create-cep.dto';
 import { Cep } from './interfaces/cep.interface';
@@ -39,6 +39,14 @@ export class CepController {
     @Param('cepId', ParameterValidationPipe) cepId: string,
   ): Promise<Cep> {
     return await this.cepService.findById(cepId);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('/:cep')
+  async getCepByNumber(
+    @Param('cep', ParameterValidationPipe) cep: string,
+  ): Promise<Cep> {
+    return await this.cepService.findByCep(cep);
   }
 
   @UseGuards(JwtAuthGuard)
