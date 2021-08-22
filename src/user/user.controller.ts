@@ -20,7 +20,6 @@ import { JwtAuthGuard } from '../auth/jwt-guard.guard';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @UseGuards(JwtAuthGuard)
   @Post()
   @UsePipes(ValidationPipe)
   async create(@Body() createUserDto: CreateUserDto): Promise<User> {
