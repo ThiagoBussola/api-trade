@@ -12,5 +12,14 @@
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*",
+    "lib/**/*",
+    "scripts/**/*",
+    "templates/**/*"
+  ],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
   }
 }
