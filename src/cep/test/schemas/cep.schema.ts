@@ -5,6 +5,8 @@ export type CepDocument = Cep & Document;
 
 @Schema()
 export class Cep {
+  _id: string;
+
   @Prop()
   cep: string;
 

@@ -26,9 +26,7 @@ export class CepService {
       );
     }
 
-    const createdCep = new this.cepModel(createCepDto);
-
-    return await createdCep.save();
+    return await this.cepModel.create(createCepDto);
   }
 
   async findAll(): Promise<Array<Cep>> {
@@ -40,6 +38,10 @@ export class CepService {
   */
   async update(cepId: string, updateCepDto: CreateCepDto): Promise<Cep> {
     await this.cepExists(cepId);
+
+    const { cep } = updateCepDto;
+
+    validationCep(cep);
 
     return await this.cepModel.findByIdAndUpdate(
       cepId,

@@ -23,19 +23,19 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   @Post()
   @UsePipes(ValidationPipe)
-  async createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
+  async create(@Body() createUserDto: CreateUserDto): Promise<User> {
     return await this.userService.create(createUserDto);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  async getAllCeps(): Promise<Array<User>> {
+  async findAll(): Promise<Array<User>> {
     return await this.userService.findAll();
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('/:userId')
-  async getCepById(
+  async findById(
     @Param('userId', ParameterValidationPipe) userId: string,
   ): Promise<User> {
     return await this.userService.findById(userId);
@@ -44,7 +44,7 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   @Put('/:userId')
   @UsePipes(ValidationPipe)
-  async updateCep(
+  async update(
     @Param('userId', ParameterValidationPipe) userId: string,
     @Body() updatedUserDto: CreateUserDto,
   ): Promise<User> {
@@ -53,7 +53,7 @@ export class UserController {
 
   @UseGuards(JwtAuthGuard)
   @Delete('/:userId')
-  async deleteCep(
+  async remove(
     @Param('userId', ParameterValidationPipe) userId: string,
   ): Promise<User> {
     return await this.userService.remove(userId);

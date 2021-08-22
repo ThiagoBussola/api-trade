@@ -23,19 +23,19 @@ export class CepController {
   @UseGuards(JwtAuthGuard)
   @Post()
   @UsePipes(ValidationPipe)
-  async createCep(@Body() createCepDto: CreateCepDto): Promise<Cep> {
+  async create(@Body() createCepDto: CreateCepDto): Promise<Cep> {
     return await this.cepService.create(createCepDto);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  async getAllCeps(): Promise<Array<Cep>> {
+  async findAll(): Promise<Array<Cep>> {
     return await this.cepService.findAll();
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('/:cepId')
-  async getCepById(
+  async findById(
     @Param('cepId', ParameterValidationPipe) cepId: string,
   ): Promise<Cep> {
     return await this.cepService.findById(cepId);
@@ -43,7 +43,7 @@ export class CepController {
 
   @UseGuards(JwtAuthGuard)
   @Get('/:cep')
-  async getCepByNumber(
+  async findByCep(
     @Param('cep', ParameterValidationPipe) cep: string,
   ): Promise<Cep> {
     return await this.cepService.findByCep(cep);
@@ -52,7 +52,7 @@ export class CepController {
   @UseGuards(JwtAuthGuard)
   @Put('/:cepId')
   @UsePipes(ValidationPipe)
-  async updateCep(
+  async update(
     @Param('cepId', ParameterValidationPipe) cepId: string,
     @Body() updatedCepDto: CreateCepDto,
   ): Promise<Cep> {
@@ -61,7 +61,7 @@ export class CepController {
 
   @UseGuards(JwtAuthGuard)
   @Delete('/:cepId')
-  async deleteCep(
+  async remove(
     @Param('cepId', ParameterValidationPipe) cepId: string,
   ): Promise<Cep> {
     return await this.cepService.remove(cepId);

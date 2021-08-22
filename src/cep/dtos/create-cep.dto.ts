@@ -4,5 +4,5 @@ export class CreateCepDto {
   @IsNotEmpty()
   cep: string;
 
-  cidade: string;
+  city: string;
 }

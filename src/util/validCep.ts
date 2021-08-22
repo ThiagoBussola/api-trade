@@ -26,6 +26,8 @@ const validationCep = (cep: any): any => {
   // todos os itens do array devem ser verdadeiros, caso contrario existem repetições indesejaveis
   const finalValidation = isValid.every((valid) => valid === true);
 
+  if (!finalValidation) throw new Error(`Esse CEP está inválido: ${cep}`);
+
   return {
     finalValidation,
     cep,
@@ -33,11 +35,3 @@ const validationCep = (cep: any): any => {
 };
 
 export { validationCep };
-
-// console.log(validationCep('123456'));
-// console.log(validationCep('135796'));
-
-// console.log(validationCep('012345'), 'esse');
-// console.log(validationCep('9999999'), 'esse');
-// console.log(validationCep('352523'));
-// console.log(validationCep('121426'));
