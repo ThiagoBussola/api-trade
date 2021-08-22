@@ -8,6 +8,7 @@ import { Model } from 'mongoose';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { User } from './interfaces/user.interface';
 import { genSaltSync, hashSync } from 'bcrypt';
+import { UpdateUserDto } from './dtos/update-user.dto';
 
 @Injectable()
 export class UserService {
@@ -39,25 +40,33 @@ export class UserService {
     return newUser;
   }
 
-  async update(userId: string, updateUserDto: CreateUserDto): Promise<User> {
-    await this.userExists(userId);
+  async update(userId: string, updateUserDto: UpdateUserDto): Promise<User> {
+    const user = await this.userExists(userId);
+    console.log('asdasdad', user);
 
-    const { name, email, password } = updateUserDto;
+    const updatedUser = updateUserDto;
 
-    const salt = genSaltSync(10);
-    const hash = hashSync(password, salt);
+    if (updatedUser.password) {
+      const salt = genSaltSync(10);
+      const hash = hashSync(updatedUser.password, salt);
 
+      const userUpdated = {
+        name: updatedUser.name,
+        email: updatedUser.email,
+        password: hash,
+      };
+      return await this.userModel
+        .findByIdAndUpdate(userId, { $set: userUpdated }, { new: true })
+        .select('-password');
+    }
     const userUpdated = {
-      name,
-      email,
-      password: hash,
+      name: updatedUser.name ? updatedUser.name : user.name,
+      email: updatedUser.email ? updatedUser.email : user.email,
     };
 
-    return await this.userModel.findByIdAndUpdate(
-      userId,
-      { $set: userUpdated },
-      { new: true },
-    );
+    return await this.userModel
+      .findByIdAndUpdate(userId, { $set: userUpdated }, { new: true })
+      .select('-password');
   }
 
   async findAll(): Promise<Array<User>> {
@@ -69,13 +78,13 @@ export class UserService {
   }
 
   async findById(userId: string): Promise<User> {
-    return await this.userExists(userId);
+    return await this.userModel.findById(userId).select('-password');
   }
 
   async remove(userId: string): Promise<User> {
     await this.userExists(userId);
 
-    return await this.userModel.findByIdAndRemove(userId);
+    return await this.userModel.findByIdAndRemove(userId).select('-password');
   }
 
   private async userExists(userId: string): Promise<User> {

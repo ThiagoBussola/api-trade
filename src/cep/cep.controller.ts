@@ -42,7 +42,7 @@ export class CepController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('/:cep')
+  @Get('/number/:cep')
   async findByCep(
     @Param('cep', ParameterValidationPipe) cep: string,
   ): Promise<Cep> {

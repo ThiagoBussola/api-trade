@@ -15,6 +15,7 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { User } from './interfaces/user.interface';
 import { ParameterValidationPipe } from '../common/pipes/parameters-validation.pipe';
 import { JwtAuthGuard } from '../auth/jwt-guard.guard';
+import { UpdateUserDto } from './dtos/update-user.dto';
 
 @Controller('users')
 export class UserController {
@@ -45,7 +46,7 @@ export class UserController {
   @UsePipes(ValidationPipe)
   async update(
     @Param('userId', ParameterValidationPipe) userId: string,
-    @Body() updatedUserDto: CreateUserDto,
+    @Body() updatedUserDto: UpdateUserDto,
   ): Promise<User> {
     return await this.userService.update(userId, updatedUserDto);
   }
