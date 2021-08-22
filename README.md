@@ -57,7 +57,11 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+# Ferramentas utilizadas E instruções
+Para o desenvolvimento da aplicação back-end foi utilizado o framework NestJs e banco de dados MongooDB, para testar as requisições foi feito uso do insomnia, infelizmente não consegui exportar as requisições por conta de um erro do meu SO, caso consiga estarei adicionando elas no projeto.
 
+Após baixar o projeto para testar as rotas e as validações basta rodar npm run test
+No arquivo .ENV está a conexão local do banco de dados, basta trocar a URL de conexão para que funcione no seu banco local.
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
