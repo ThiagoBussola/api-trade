@@ -58,7 +58,7 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 # Ferramentas utilizadas E instruções
-Para o desenvolvimento da aplicação back-end foi utilizado o framework NestJs e banco de dados MongooDB, para testar as requisições foi feito uso do insomnia, infelizmente não consegui exportar as requisições por conta de um erro do meu SO, caso consiga estarei adicionando elas no projeto.
+Para o desenvolvimento da aplicação back-end foi utilizado o framework NestJs e banco de dados MongooDB, para testar as requisições foi feito uso do insomnia, as requisições estão na raiz do projeto no arquivo Insomnia_2021-08-22.json, basta importar para o programa e executar elas.
 
 Após baixar o projeto para testar as rotas e as validações basta rodar npm run test
 No arquivo .ENV está a conexão local do banco de dados, basta trocar a URL de conexão para que funcione no seu banco local.
